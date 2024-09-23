@@ -1,0 +1,47 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import matplotlib.patches as patches
+
+# Create a function to draw the diagram
+def draw_pythagorean_theorem():
+    fig, ax = plt.subplots(figsize=(8, 8))
+
+    # Coordinates for the right triangle
+    a = 3
+    b = 4
+    c = np.sqrt(a**2 + b**2)
+
+    # Right triangle
+    triangle = patches.Polygon([[0, 0], [a, 0], [0, b]], closed=True, edgecolor='black', facecolor='none', lw=2)
+    ax.add_patch(triangle)
+
+    # Square on side 'a'
+    square_a = patches.Rectangle((0, 0), a, a, edgecolor='blue', facecolor='lightblue', alpha=0.5)
+    ax.add_patch(square_a)
+
+    # Square on side 'b'
+    square_b = patches.Rectangle((0, b), b, b, edgecolor='green', facecolor='lightgreen', alpha=0.5)
+    ax.add_patch(square_b)
+
+    # Square on hypotenuse 'c'
+    hypotenuse_square = patches.Rectangle((a, 0), c, c, edgecolor='red', facecolor='lightcoral', alpha=0.5, angle=np.arctan(b/a)*(180/np.pi))
+    ax.add_patch(hypotenuse_square)
+
+    # Labels
+    ax.text(a/2, -0.5, "a", fontsize=14, ha="center")
+    ax.text(-0.5, b/2, "b", fontsize=14, va="center")
+    ax.text(a/2, b/2, "c", fontsize=14, color='black')
+
+    # Set limits and aspect ratio
+    ax.set_xlim(-1, max(a, b) + 2)
+    ax.set_ylim(-1, max(a, b) + 2)
+    ax.set_aspect('equal', 'box')
+
+    # Hide axes
+    ax.axis('off')
+
+    plt.title("Visual Demonstration of Pythagoras' Theorem", fontsize=16)
+    plt.show()
+
+# Call the function to create the diagram
+draw_pythagorean_theorem()
